@@ -80,7 +80,7 @@
             type="submit"
             mat-raised-button
             color="primary"
-            [disabled]="newTaskProfile.get('title').value ===''"
+            [disabled]="newTaskProfile.get('title').value.trim() ==='' "
         >
             Dodaj zadanie
         </button>

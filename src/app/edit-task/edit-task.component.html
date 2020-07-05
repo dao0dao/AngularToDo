@@ -83,7 +83,7 @@
             type="submit"
             mat-raised-button
             color="primary"
-            [disabled]="taskProfileForm.get('title').value ===''"
+            [disabled]="taskProfileForm.get('title').value.trim() ===''"
             (click)="saveChanges()"
         >
             Zatwierdź zmiany
