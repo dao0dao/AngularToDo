@@ -1,0 +1,27 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.App {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    padding: 10px;
+    .sort {
+        width: 100%;
+        margin: 20px auto;
+        padding-top: 15px;
+        text-align: center;
+        border-top: 1px solid #aaaaaa;
+    }
+}
+app-add-task,
+app-task-list {
+    width: 100%;
+    &:not(app-task-list) {
+        max-width: 600px;
+    }
+}

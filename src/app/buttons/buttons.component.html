@@ -1,0 +1,27 @@
+<div class="buttons">
+    <button
+        *ngIf="taskStatus !== condition"
+        type="button"
+        mat-mini-fab
+        color="primary"
+        (click)="done()"
+    >
+        <i class="fas fa-check"></i>
+    </button>
+    <button
+        type="button"
+        mat-mini-fab
+        color="warn"
+        (click)="edit()"
+    >
+        <i class="fas fa-edit"></i>
+    </button>
+    <button
+        type="button"
+        mat-mini-fab
+        color="accent"
+        (click)="delete()"
+    >
+        <i class="fas fa-times"></i>
+    </button>
+</div>

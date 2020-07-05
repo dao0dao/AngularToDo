@@ -1,0 +1,55 @@
+.addTask {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    .formContainer {
+        width: 100%;
+        text-align: center;
+    }
+    button {
+        margin: 20px;
+    }
+}
+.smallContainer {
+    display: flex;
+    justify-content: space-around;
+    label {
+        margin: 5px;
+    }
+    label,
+    .selection {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+    }
+    label[for="titleTask"] {
+        position: relative;
+        .errorMessage {
+            font-size: 0.6rem;
+            position: absolute;
+            bottom: 0;
+            margin: 0;
+            padding: 0;
+            color: rgb(255, 32, 32);
+        }
+    }
+}
+@media (max-width: 450px) {
+    .smallContainer {
+        width: 100%;
+        flex-direction: column;
+        label {
+            width: 100%;
+        }
+        .selection {
+            flex-direction: column;
+            align-items: center;
+            .mat-form-field {
+                width: 60%;
+                margin: 10px;
+            }
+        }
+    }
+}

@@ -1,0 +1,124 @@
+<div class="taskList">
+
+    <div class="example-container">
+        <h2>Do zrobienia</h2>
+        <div
+            data-typeList="todo"
+            cdkDropList
+            #todoList="cdkDropList"
+            [cdkDropListData]="todo"
+            [cdkDropListConnectedTo]="[doneList, todoList, inProgressList]"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)"
+        >
+            <div
+                class="example-box"
+                *ngFor="let item of todo"
+                cdkDrag
+                [cdkDragData]="item"
+                [ngStyle]="styleCondition(item.priority)"
+            >
+                <div
+                    class="example-handle"
+                    cdkDragHandle
+                >
+                    <i class="far fa-hand-paper"></i>
+                </div>
+                <app-buttons
+                    [idItem]="item.id"
+                    [taskStatus]="item.status"
+                    (doneItem)="doneTask($event)"
+                    (editTask)="edit($event)"
+                    (deletedItem)="delete($event)"
+                ></app-buttons>
+                <p>Tytuł: {{item.title}}</p>
+                <p>Opis: {{item.text}}</p>
+                <p>
+                    Priorytet: {{namePriority(item.priority)}}
+                </p>
+                <p>Do kiedy: {{item.date}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="example-container">
+        <h2>W trakcie</h2>
+        <div
+            data-typeList="inProgress"
+            cdkDropList
+            #inProgressList="cdkDropList"
+            [cdkDropListData]="inProgress"
+            [cdkDropListConnectedTo]="[doneList, todoList, inProgressList]"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)"
+        >
+            <div
+                class="example-box"
+                *ngFor="let item of inProgress; let i = index"
+                [cdkDragData]="item"
+                [ngStyle]="styleCondition(item.priority)"
+                cdkDrag
+            >
+                <div
+                    class="example-handle"
+                    cdkDragHandle
+                >
+                    <i class="far fa-hand-paper"></i>
+                </div>
+                <app-buttons
+                    [idItem]="item.id"
+                    [taskStatus]="item.status"
+                    (doneItem)="doneTask($event)"
+                    (editTask)="edit($event)"
+                    (deletedItem)="delete($event)"
+                ></app-buttons>
+                <p>Tytuł: {{item.title}}</p>
+                <p>Opis: {{item.text}}</p>
+                <p>
+                    Priorytet: {{namePriority(item.priority)}}
+                </p>
+                <p>Do kiedy: {{item.date}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="example-container">
+        <h2>Zrobione</h2>
+        <div
+            data-typeList="done"
+            cdkDropList
+            #doneList="cdkDropList"
+            [cdkDropListData]="done"
+            [cdkDropListConnectedTo]="[doneList, todoList, inProgressList]"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)"
+        >
+            <div
+                class="example-box"
+                *ngFor="let item of done; let i = index"
+                cdkDrag
+                [cdkDragData]="item"
+                [ngStyle]="styleCondition(item.priority)"
+            >
+                <div
+                    class="example-handle"
+                    cdkDragHandle
+                >
+                    <i class="far fa-hand-paper"></i>
+                </div>
+                <app-buttons
+                    [idItem]="item.id"
+                    [taskStatus]="item.status"
+                    (doneItem)="doneTask($event)"
+                    (editTask)="edit($event)"
+                    (deletedItem)="delete($event)"
+                ></app-buttons>
+                <p>Tytuł: {{item.title}}</p>
+                <p>Opis: {{item.text}}</p>
+                <p>
+                    Priorytet: {{namePriority(item.priority)}}
+                </p>
+                <p>Do kiedy: {{item.date}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
