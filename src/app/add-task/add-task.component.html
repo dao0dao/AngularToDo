@@ -7,7 +7,7 @@
         <div class="smallContainer">
             <label for="titleTask">
                 <mat-form-field class="example-full-width">
-                    <mat-label [ngStyle]="condition ? {color: 'red'} : null">Tytuł zadania</mat-label>
+                    <mat-label>Tytuł zadania</mat-label>
                     <input
                         matInput
                         name="titleTask"
@@ -16,12 +16,7 @@
                         formControlName="title"
                     >
                 </mat-form-field>
-                <p
-                    *ngIf="condition"
-                    class="errorMessage"
-                >
-                    Wymagane pole
-                </p>
+                <p *ngIf="formTitle.errors && formTitle.touched" class="errorMessage">Wymagane pole</p>
             </label>
             <label for="textTask">
                 <mat-form-field class="example-full-width">
@@ -80,7 +75,7 @@
             type="submit"
             mat-raised-button
             color="primary"
-            [disabled]="newTaskProfile.get('title').value.trim() ==='' "
+            [disabled]="newTaskProfile.invalid"
         >
             Dodaj zadanie
         </button>

@@ -95,5 +95,6 @@ export class TaskListComponent implements DoCheck {
     this.todo = this.tasks.filter(task => task.status === 'toDo');
     this.done = this.tasks.filter(task => task.status === 'done');
     this.inProgress = this.tasks.filter(task => task.status === 'inProgress')
+    // console.log(this.tasks);
   }
 }

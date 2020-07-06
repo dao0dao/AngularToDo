@@ -1,13 +1,13 @@
-import { Component, OnInit, Output, DoCheck, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Task } from '../app.component'
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
   styleUrls: ['./add-task.component.scss']
 })
-export class AddTaskComponent implements OnInit, DoCheck {
+export class AddTaskComponent implements OnInit {
 
 
   @Output() addTask = new EventEmitter()
@@ -19,7 +19,6 @@ export class AddTaskComponent implements OnInit, DoCheck {
   textTask: string
   dateTask: string
   priorityTask: string = 'med'
-  condition: boolean = false
 
   newTaskProfile: FormGroup
 
@@ -35,22 +34,24 @@ export class AddTaskComponent implements OnInit, DoCheck {
     this.idTask++
     this.addTask.emit(newTask)
     this.newTaskProfile.reset()
+    this.formTitle.markAsUntouched
     this.newTaskProfile.get('priority').setValue(2)
     this.newTaskProfile.get('status').setValue('toDo')
   }
 
   constructor(private fb: FormBuilder) { }
 
+  get formTitle() {
+    return this.newTaskProfile.get('title')
+  }
+
   ngOnInit() {
     this.newTaskProfile = this.fb.group({
-      title: [''],
+      title: ['', [Validators.required]],
       text: [''],
       date: [''],
       status: ['toDo'],
       priority: [2],
     })
-  }
-  ngDoCheck() {
-    this.condition = (this.newTaskProfile.get('title').value === '' || this.newTaskProfile.get('title').value === null) && this.newTaskProfile.get('title').touched
   }
 }
