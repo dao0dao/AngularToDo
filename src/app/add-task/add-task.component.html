@@ -16,10 +16,16 @@
             formControlName="title"
           />
         </mat-form-field>
-        <p *ngIf="formTitle.errors?.IsRequired && formTitle.touched" class="errorMessage">
+        <p
+          *ngIf="formTitle.errors?.IsRequired && formTitle.touched"
+          class="errorMessage"
+        >
           Wymagane pole
         </p>
-        <p *ngIf="formTitle.errors?.StartWithSpace && formTitle.touched" class="errorMessage">
+        <p
+          *ngIf="formTitle.errors?.StartWithSpace && formTitle.touched"
+          class="errorMessage"
+        >
           Tytuł nie może zaczynać od spacji
         </p>
       </label>
@@ -74,7 +80,7 @@
       type="submit"
       mat-raised-button
       color="primary"
-      [disabled]="newTaskProfile.invalid"
+      [disabled]="newTaskProfile.invalid || formTitle.untouched"
     >
       Dodaj zadanie
     </button>
