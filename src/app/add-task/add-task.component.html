@@ -1,83 +1,82 @@
 <div class="addTask">
-    <form
-        class="formContainer"
-        [formGroup]="newTaskProfile"
-        (ngSubmit)="creatNewTask()"
+  <form
+    class="formContainer"
+    [formGroup]="newTaskProfile"
+    (ngSubmit)="creatNewTask()"
+  >
+    <div class="smallContainer">
+      <label for="titleTask">
+        <mat-form-field class="example-full-width">
+          <mat-label>Tytuł zadania</mat-label>
+          <input
+            matInput
+            name="titleTask"
+            id="titleTask"
+            placeholder="Tytuł..."
+            formControlName="title"
+          />
+        </mat-form-field>
+        <p *ngIf="formTitle.errors?.IsRequired && formTitle.touched" class="errorMessage">
+          Wymagane pole
+        </p>
+        <p *ngIf="formTitle.errors?.StartWithSpace && formTitle.touched" class="errorMessage">
+          Tytuł nie może zaczynać od spacji
+        </p>
+      </label>
+      <label for="textTask">
+        <mat-form-field class="example-full-width">
+          <mat-label>Treść zadania</mat-label>
+          <input
+            matInput
+            name="textTask"
+            id="textTask"
+            placeholder="Treść..."
+            formControlName="text"
+          />
+        </mat-form-field>
+      </label>
+    </div>
+    <div class="smallContainer">
+      <div class="selection">
+        <mat-form-field appearance="fill">
+          <mat-label>Status</mat-label>
+          <select formControlName="status" matNativeControl>
+            <option value="toDo">Do zrobienia</option>
+            <option value="inProgress">W trakcie</option>
+          </select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Priorytet zadania</mat-label>
+          <select formControlName="priority" matNativeControl>
+            <option value="3">Wysoki</option>
+            <option value="2">Średni</option>
+            <option value="1">Niski</option>
+          </select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="smallContainer">
+      <label for="dateTask">
+        <mat-form-field class="example-full-width">
+          <mat-label>Do kiedy:</mat-label>
+          <input
+            matInput
+            type="date"
+            name="dateTask"
+            id="dateTask"
+            [min]="today | date: 'yyyy-MM-dd'"
+            formControlName="date"
+          />
+        </mat-form-field>
+      </label>
+    </div>
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="newTaskProfile.invalid"
     >
-        <div class="smallContainer">
-            <label for="titleTask">
-                <mat-form-field class="example-full-width">
-                    <mat-label>Tytuł zadania</mat-label>
-                    <input
-                        matInput
-                        name="titleTask"
-                        id="titleTask"
-                        placeholder="Tytuł..."
-                        formControlName="title"
-                    >
-                </mat-form-field>
-                <p *ngIf="formTitle.errors && formTitle.touched" class="errorMessage">Wymagane pole</p>
-            </label>
-            <label for="textTask">
-                <mat-form-field class="example-full-width">
-                    <mat-label>Treść zadania</mat-label>
-                    <input
-                        matInput
-                        name="textTask"
-                        id="textTask"
-                        placeholder="Treść..."
-                        formControlName="text"
-                    >
-                </mat-form-field>
-            </label>
-        </div>
-        <div class="smallContainer">
-            <div class="selection">
-                <mat-form-field appearance="fill">
-                    <mat-label>Status</mat-label>
-                    <select
-                        formControlName="status"
-                        matNativeControl
-                    >
-                        <option value="toDo">Do zrobienia</option>
-                        <option value="inProgress">W trakcie</option>
-                    </select>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Priorytet zadania</mat-label>
-                    <select
-                        formControlName="priority"
-                        matNativeControl
-                    >
-                        <option value="3">Wysoki</option>
-                        <option value="2">Średni</option>
-                        <option value="1">Niski</option>
-                    </select>
-                </mat-form-field>
-            </div>
-        </div>
-        <div class="smallContainer">
-            <label for="dateTask">
-                <mat-form-field class="example-full-width">
-                    <mat-label>Do kiedy:</mat-label>
-                    <input
-                        matInput
-                        type="date"
-                        name="dateTask"
-                        id="dateTask"
-                        [min]='today |date : "yyyy-MM-dd"'
-                        formControlName="date"
-                    >
-                </mat-form-field>
-            </label>
-        </div>
-        <button
-            type="submit"
-            mat-raised-button
-            color="primary"
-            [disabled]="newTaskProfile.invalid"
-        >
-            Dodaj zadanie
-        </button>
-    </form>
+      Dodaj zadanie
+    </button>
+  </form>
 </div>
