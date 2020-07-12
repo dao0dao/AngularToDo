@@ -38,9 +38,6 @@ export class AddTaskComponent implements OnInit, DoCheck {
     };
     this.idTask++;
     this.addTask.emit(newTask);
-    // this.newTaskProfile.reset();
-    // this.newTaskProfile.updateValueAndValidity();
-
     this.formTitle.setValue('');
     this.formText.setValue('');
     this.formDate.setValue('');
@@ -50,7 +47,7 @@ export class AddTaskComponent implements OnInit, DoCheck {
     this.formTitle.markAsPristine();
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   get formTitle() {
     return this.newTaskProfile.get('title');

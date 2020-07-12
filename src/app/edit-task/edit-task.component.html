@@ -7,7 +7,7 @@
         <div class="smallContainer">
             <label for="titleTask">
                 <mat-form-field class="example-full-width">
-                    <mat-label [ngStyle]="condition ? {color: 'red'} : null">Tytuł zadania</mat-label>
+                    <mat-label>Tytuł zadania</mat-label>
                     <input
                         formControlName="title"
                         matInput
@@ -17,10 +17,16 @@
                     >
                 </mat-form-field>
                 <p
-                    *ngIf="condition"
+                    *ngIf="taskTitle.errors?.IsRequired"
                     class="errorMessage"
                 >
                     Wymagane pole
+                </p>
+                <p
+                    *ngIf="taskTitle.errors?.StartWithSpace"
+                    class="errorMessage"
+                >
+                    Pole nie może zaczynać się od spacji
                 </p>
             </label>
             <label for="textTask">
@@ -83,7 +89,7 @@
             type="submit"
             mat-raised-button
             color="primary"
-            [disabled]="taskProfileForm.get('title').value ===''"
+            [disabled]="taskProfileForm.invalid"
             (click)="saveChanges()"
         >
             Zatwierdź zmiany

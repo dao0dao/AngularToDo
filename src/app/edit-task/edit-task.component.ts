@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, DoCheck, Input, Output, EventEmitter } from '@angular/core';
-
+import { Component, OnInit, DoCheck, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from '../app.component'
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IsRequired, StartWithSpace } from '../MyValidators';
 
 @Component({
   selector: 'app-edit-task',
@@ -16,18 +16,21 @@ export class EditTaskComponent implements OnInit, OnDestroy, DoCheck {
 
   taskProfileForm: FormGroup
   today: Date = new Date()
-  condition: boolean
 
   saveChanges() {
     let updateTask: Task = {
       id: this.editedTask[0].id,
-      title: this.taskProfileForm.get('title').value,
+      title: this.taskTitle.value,
       text: this.taskProfileForm.get('text').value,
       date: this.taskProfileForm.get('date').value,
       status: this.taskProfileForm.get('status').value,
       priority: parseInt(this.taskProfileForm.get('priority').value)
     }
     this.update.emit(updateTask)
+  }
+
+  get taskTitle() {
+    return this.taskProfileForm.get('title');
   }
 
   closeEditor() {
@@ -39,16 +42,19 @@ export class EditTaskComponent implements OnInit, OnDestroy, DoCheck {
   ngOnInit() {
     let { title, text, date, status, priority } = this.editedTask[0]
     this.taskProfileForm = this.fb.group({
-      title: [title],
+      title: [title, [IsRequired(), StartWithSpace()]],
       text: [text],
       date: [date],
       status: [status],
       priority: [priority],
     })
+    this.taskTitle.markAsTouched()
   }
-  ngDoCheck(){
-    this.condition = (this.taskProfileForm.get('title').value === '' || this.taskProfileForm.get('title').value === null) && this.taskProfileForm.get('title').touched
+
+  ngDoCheck() {
+    this.taskTitle.updateValueAndValidity()
   }
+
   ngOnDestroy() {
     this.taskProfileForm = this.fb.group({
       title: [''],
